@@ -34,13 +34,17 @@ function App() {
     
   }
   return (
-    <div style={{maxHeight: '164px', maxWidth:'500px', border: '1px solid black'}}>
+    <div style={{maxHeight: '100%', maxWidth:'100%', border: '1px solid black'}}>
       <div>asdasd</div>
       <div style={{ maxHeight: 'inherit', overflow:'scroll'}}>
-        {
+      <Box sx={{ display:'flex', flexDirection:'row', justifyContent: 'space-between' }}>
+    <video controls src='keshi.mp4' type='video/mp4' height='200px' width='200px'>
+   
+    </video>
+        {/* {
           Object.keys(tradeList).map((id) => (
-            <Box sx={{ display:'flex', justifyContent: 'space-between' }}>
-            <div>{tradeList[id].name}</div>
+<div>
+<div>{tradeList[id].name}</div>
             <div>
               <Button sx={{ 
                 width: '35px',
@@ -55,9 +59,10 @@ function App() {
                 <PowerSettingsNew />
                </Button>
             </div>
-          </Box>
+</div>
           ))
-        }
+        } */}
+        </Box>
 
         
       </div>
