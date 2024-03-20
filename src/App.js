@@ -1,7 +1,8 @@
 import { PowerSettingsNew } from '@mui/icons-material';
 import './App.css';
-import { Box, Button } from '@mui/material';
-
+import { Box, Button, CircularProgress } from '@mui/material';
+import { ResizableBox } from 'react-resizable';
+import { useState, useEffect } from 'react';
 function App() {
   const tradeList = {
     "H1" : {
@@ -33,41 +34,23 @@ function App() {
     },
     
   }
+  const [isLoading, setIsLoading] = useState(true)
+  useEffect(() => {
+    setTimeout(() => {
+      setIsLoading(false)
+    }, 3000)
+  })
+  //window.innerheight
   return (
-    <div style={{maxHeight: '100%', maxWidth:'100%', border: '1px solid black'}}>
-      <div>asdasd</div>
-      <div style={{ maxHeight: 'inherit', overflow:'scroll'}}>
-      <Box sx={{ display:'flex', flexDirection:'row', justifyContent: 'space-between' }}>
-    <video controls src='keshi.mp4' type='video/mp4' height='200px' width='200px'>
-   
-    </video>
-        {/* {
-          Object.keys(tradeList).map((id) => (
-<div>
-<div>{tradeList[id].name}</div>
-            <div>
-              <Button sx={{ 
-                width: '35px',
-                height: '35px'
-               }}>
-                <PowerSettingsNew />
-               </Button>
-               <Button sx={{ 
-                width: '35px',
-                height: '35px'
-               }}>
-                <PowerSettingsNew />
-               </Button>
-            </div>
-</div>
-          ))
-        } */}
-        </Box>
 
-        
-      </div>
+          <ResizableBox className="box hover-handles" width={640} height={512} minConstraints={[150, 150]}
+    style={{border:'1px solid black'}}
+    >
+        {isLoading? <CircularProgress/> :
+        <video src='keshi.mp4' autoplay controls style={{height:'inherit' ,width:"inherit" ,aspectRatio:'640/512' }} type='video/mp4' />
+        } 
+    </ResizableBox>
 
-    </div>
 
   );
 }
