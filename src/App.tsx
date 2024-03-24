@@ -5,6 +5,7 @@ import { Box, Button, CircularProgress, Popover } from '@mui/material';
 import { ResizableBox } from 'react-resizable';
 import { useState, useEffect } from 'react';
 import PopoverComponent from './PopoverComponent'
+import Draggable from 'react-draggable';
 
 export default function App() {
   const tradeList = {
@@ -38,6 +39,10 @@ export default function App() {
     
   }
   const [isLoading, setIsLoading] = useState(true)
+  const [axiss, setAxiss] = useState({
+    x: '',
+    y: ''
+  })
   useEffect(() => {
     setTimeout(() => {
       setIsLoading(false)
@@ -50,26 +55,33 @@ export default function App() {
   function handleRequestClose () {
     setIsState(false)
   }
+  function setDraggablePosition() {
+    setAxiss({
+      x: '-50%',
+      y: '-50%'
+    })
+  }
   //window.innerheight
   return (
           <>
           <div>
             <Button onClick={handleClick}>Hello</Button>
             <Popover open={isState}>
-              <PopoverComponent callback={handleRequestClose}/>
+              <PopoverComponent callback={setDraggablePosition}/>
             </Popover>
             </div>
           
-          <ResizableBox className="box hover-handles" width={640} height={512} minConstraints={[150, 150]}
-      style={{ border: '1px solid black' }}
-    >
-      {isLoading ? <CircularProgress /> :
-        <video src='keshi.mp4' autoPlay={true} controls style={{ height: 'inherit', width: "inherit", aspectRatio: '640/512' }} />}
-    </ResizableBox></>
+<Draggable axis= "none" defaultPosition={{x: 540, y:540}} positionOffset={axiss}
 
-
-
-
+>
+  <ResizableBox className="box hover-handles" width={640} height={512} minConstraints={[150, 150]}
+        style={{ border: '1px solid black' }}
+      >
+        {isLoading ? <CircularProgress /> :
+          <video src='keshi.mp4' autoPlay={true} controls style={{ height: 'inherit', width: "inherit", aspectRatio: '640/512' }} />}
+      </ResizableBox>
+</Draggable>
+</>
   );
 }
 
