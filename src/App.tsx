@@ -1,25 +1,31 @@
-import React from 'react';
+import React, { useState } from 'react';
 import logo from './logo.svg';
 import './App.css';
+import Draggable from 'react-draggable';
+import { AppBar, Button, Typography } from '@mui/material';
+import Panel from './components/Panel';
 
 function App() {
+  const [state, setState] = useState(false)
+  function renderPanel() {
+    setState(true)
+  }
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
+    <>
+      <AppBar position='static'>
+        <Typography variant="h6" color="inherit" component="div">
+          Photos
+        </Typography>
+      </AppBar>
+      <body style={{height:'100vh', width:'100vw'}}>
+        <Button
+          onClick={renderPanel}
         >
-          Learn React
-        </a>
-      </header>
-    </div>
+          Click H1
+        </Button>
+        {state ? <Panel /> : null}
+      </body>
+    </>
   );
 }
 
