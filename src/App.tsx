@@ -17,14 +17,13 @@ function App() {
           Photos
         </Typography>
       </AppBar>
-      <body style={{height:'100vh', width:'100vw'}}>
         <Button
           onClick={renderPanel}
         >
           Click H1
         </Button>
         {state ? <Panel /> : null}
-      </body>
+
     </>
   );
 }
