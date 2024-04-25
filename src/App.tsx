@@ -7,8 +7,23 @@ import Panel from './components/Panel';
 
 function App() {
   const [state, setState] = useState(false)
+  const test = [
+    {
+      name: 'archie',
+      color: 'purple'
+    },
+    {
+      name: 'bob',
+      color: 'green'
+    },
+    {
+      name: 'clarinda',
+      color: 'blue'
+    }
+  ]
   function renderPanel() {
     setState(true)
+
   }
   return (
     <>
@@ -17,12 +32,25 @@ function App() {
           Photos
         </Typography>
       </AppBar>
-        <Button
-          onClick={renderPanel}
-        >
-          Click H1
-        </Button>
-        {state ? <Panel /> : null}
+      <Button
+        onClick={renderPanel}
+      >
+        Click it
+      </Button>
+      {state ?
+        Object.values(test).map((item) => {
+          return (
+            <Panel
+              key={item.name}
+              name={item.name}
+              color={item.color}
+              defaultPosition={{ x: 100, y: 100 }}
+              defaultSize={{ width: 500, height: 500 }}
+
+            />)
+        })
+
+        : null}
 
     </>
   );
