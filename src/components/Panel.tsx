@@ -50,7 +50,27 @@ const Panel: React.FC<PanelProps> = ({ name, color, defaultPosition, defaultSize
   const toggleOpen = () => {
     setIsOpen(!isOpen);
   };
+  const [woop, setwoop] = useState(true);
 
+  const toggleWindow = () => {
+    setwoop(!woop);
+    setState({
+      ...state,
+      height: woop ? '42px' : `${originalHeight.height}px`,
+    });
+  };
+  // function useWindowSize() {
+  //   const [size, setSize] = useState([0, 0]);
+  //   useLayoutEffect(() => {
+  //     function updateSize() {
+  //       setSize([window.innerWidth, window.innerHeight]);
+  //     }
+  //     window.addEventListener('resize', updateSize);
+  //     updateSize();
+  //     return () => window.removeEventListener('resize', updateSize);
+  //   }, []);
+  //   return size;
+  // }
   return (
     <>
       <Rnd
@@ -76,22 +96,25 @@ const Panel: React.FC<PanelProps> = ({ name, color, defaultPosition, defaultSize
             title={name}
             action={
               <>
-                <Button
+                <Button onClick={toggleWindow}>
+                  {woop ? <ExpandMoreIcon /> : <ExpandLessIcon />}
+                </Button>
+                {/* <Button
                   onClick={() => {
                     {state.height === '42px' ? handleExpand(name)  : handleToggle(name)}
                   }}
                 >
                   {state.height === '42px' ? <ExpandMoreIcon/>  : <ExpandLessIcon />}
-                </Button>
+                </Button> */}
               </>
             }
           />
-                <CardContent id={name} style={{ height: 'calc(100%-42px)', backgroundColor: 'black' }}>
+          <CardContent id={name} style={{ height: 'calc(100%-42px)', backgroundColor: 'black' }}>
 
-                </CardContent>
-              </Card>
-          </Rnd>
-          {/* <Rnd
+          </CardContent>
+        </Card>
+      </Rnd>
+      {/* <Rnd
         lockAspectRatio={1.25}
         lockAspectRatioExtraHeight={42}
         bounds={'window'}
@@ -124,8 +147,8 @@ const Panel: React.FC<PanelProps> = ({ name, color, defaultPosition, defaultSize
         </Box>
 
       </Rnd> */}
-        </>
-        )
+    </>
+  )
 }
 
-        export default Panel
+export default Panel
